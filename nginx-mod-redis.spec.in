@@ -1,7 +1,7 @@
 Summary: Redis caching module for mainline nginx
 Name: nginx-mod-redis
 Version: 0.3.9
-Release: 2%{?dist}
+Release: 1%{?dist}
 Vendor: Artera
 URL: https://www.nginx.com/resources/wiki/modules/redis/
 
@@ -43,7 +43,7 @@ Redis caching module for mainline nginx.
 
 %build
 cd %{_builddir}/nginx-%{_nginxver}
-./configure %(nginx -V 2>&1 | grep 'configure arguments' | sed -r 's@^[^:]+: @@') --add-dynamic-module=../ngx_http_redis-%{version}
+./configure --with-file-aio --with-ipv6 --with-stream %(nginx -V 2>&1 | grep -Po -- '--with-http[^ ]+' | xargs echo) --with-cc-opt='%{optflags}' --add-dynamic-module=../ngx_http_redis-%{version}
 make modules
 
 %install
