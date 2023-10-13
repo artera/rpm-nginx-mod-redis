@@ -45,7 +45,7 @@ cd %{_builddir}/ngx_http_redis-%{version}
 
 %build
 cd %{_builddir}/nginx-%{_nginxver}
-./configure %(nginx -V 2>&1 | grep 'configure arguments' | sed -r 's@^[^:]+: @@') --add-dynamic-module=../ngx_http_redis-%{version}
+./configure --with-compat --add-dynamic-module=../ngx_http_redis-%{version}
 make modules
 
 %install
