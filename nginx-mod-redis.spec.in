@@ -13,6 +13,7 @@ URL: https://www.nginx.com/resources/wiki/modules/redis/
 
 Source0: https://nginx.org/download/nginx-%{_nginxver}.tar.gz
 Source1: https://people.freebsd.org/~osa/ngx_http_redis-%{version}.tar.gz
+Patch0: nginx-1.23.patch
 
 Requires: nginx = 1:%{_nginxver}
 BuildRequires: nginx
@@ -39,6 +40,8 @@ Redis caching module for mainline nginx.
 %prep
 %setup -q -n nginx-%{_nginxver}
 %setup -T -D -b 1 -n ngx_http_redis-%{version}
+cd %{_builddir}/ngx_http_redis-%{version}
+%autopatch -p1
 
 %build
 cd %{_builddir}/nginx-%{_nginxver}
